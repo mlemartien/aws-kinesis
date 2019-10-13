@@ -1,5 +1,7 @@
 # Create the Kinesis Stream using the AWS CLI:
 # aws kinesis create-stream --stream-name discover_kinesis --shard-count 1
+# Delete using
+# aws kinesis delete-stream --stream-name discover_kinesis
 
 # https://aws.amazon.com/fr/blogs/big-data/snakes-in-the-stream-feeding-and-eating-amazon-kinesis-streams-with-python/
 
