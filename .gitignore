@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# venv folders + VSCode debug
+bin/
+include/
+lib/
+pyvenv.cfg
+launch.json
+
 # C extensions
 *.so
 
