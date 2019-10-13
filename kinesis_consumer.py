@@ -4,7 +4,7 @@
 # https://aws.amazon.com/fr/blogs/big-data/snakes-in-the-stream-feeding-and-eating-amazon-kinesis-streams-with-python/
 
 import json
-import uuid
+import time
 
 import boto3
 
@@ -21,11 +21,10 @@ def main():
     shard_iterator = kinesis_client.get_shard_iterator(
         StreamName=my_stream_name,
         ShardId=my_shard_id,
-        ShardIteratorType='LATEST')['ShardIterator']
-    )
+        ShardIteratorType="LATEST")["ShardIterator"]
 
     # Keep reading from the shard
-    While True:
+    while True:
         record_response = kinesis_client.get_records(
             ShardIterator=shard_iterator,
             Limit=5
@@ -33,5 +32,5 @@ def main():
         print(record_response)
         time.sleep(3)
 
-        if  'NextShardIterator' Not in record_response:
-            break;
+        if 'NextShardIterator' not in record_response:
+            break
