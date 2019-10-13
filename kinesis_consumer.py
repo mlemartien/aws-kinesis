@@ -14,7 +14,7 @@ def main():
 
     # Obtain the shard ID of the stream (should only be one shard in this stream)
     stream_descriptor = kinesis_client.describe_stream(StreamName=my_stream_name)
-    my_shard_id = response['StreamDescription']['Shards'][0]['ShardId']
+    my_shard_id = stream_descriptor['StreamDescription']['Shards'][0]['ShardId']
     print("Reading from shard {}".format(my_shard_id))
 
     # Get a shard iterator (https://docs.aws.amazon.com/fr_fr/kinesis/latest/APIReference/API_GetShardIterator.html)
@@ -32,5 +32,11 @@ def main():
         print(record_response)
         time.sleep(3)
 
-        if 'NextShardIterator' not in record_response:
+        if 'NextShardIterator' in record_response:
+            shard_iterator = record_response["NextShardIterator"]
+        else:
             break
+
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()        
